@@ -54,7 +54,7 @@ RUN apk update && apk upgrade && \
     apk add --no-cache git
 
 ENV ARGO_VERSION=v3.0.2
-
+RUN echo "arch ${ARCH} version ${ARGO_VERSION}"
 RUN wget -q https://github.com/argoproj/argo/releases/download/${ARGO_VERSION}/argo-linux-${ARCH}.gz
 RUN gunzip argo-linux-${ARCH}.gz
 RUN chmod +x argo-linux-${ARCH}
