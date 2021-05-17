@@ -72,6 +72,8 @@ jobs:
           PLATFORM: ${{ matrix.platform }}
           TARGET: ${{ matrix.target }}
         run: |
+          ls -l *
+          pwd
           tag=$(basename $GITHUB_REF)
           if [ $tag = "master" ]; then
             tag="latest"
@@ -179,6 +181,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: binaries
+          path: dist/
 
       - name: Release binaries
         uses: softprops/action-gh-release@v1
