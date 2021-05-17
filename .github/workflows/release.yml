@@ -92,8 +92,6 @@ jobs:
           image_name="${QUAYIO_ORG}/${TARGET}:${tag}-${tag_suffix}"
 
           docker buildx build \
-            --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
             --platform="${PLATFORM}" \
             --build-arg "ARCH=arm64" \
@@ -150,8 +148,6 @@ jobs:
           image_name="${QUAYIO_ORG}/${TARGET}:${tag}-${tag_suffix}"
 
           docker buildx build \
-            --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
             --platform="${PLATFORM}" \
             --build-arg "ARCH=amd64" \
