@@ -78,7 +78,7 @@ jobs:
             tag="latest"
           fi
           image_name="${QUAYIO_ORG}/${TARGET}:${tag}"
-          echo '::set-output name=TAG_LIST::$image_name'
+          echo "::set-output name=TAG_LIST::$image_name"
 
       - name: Container build and push
         uses: docker/build-push-action@v2
