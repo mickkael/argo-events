@@ -26,6 +26,7 @@ override LDFLAGS += \
   -X ${PACKAGE}.gitTreeState=${GIT_TREE_STATE}
 
 ifeq (${DOCKER_PUSH},true)
+PUSH_OPTION="--push"
 ifndef IMAGE_NAMESPACE
 $(error IMAGE_NAMESPACE must be set to push images (e.g. IMAGE_NAMESPACE=quay.io/argoproj))
 endif
@@ -68,7 +69,6 @@ image-linux-%: dist/$(BINARY_NAME)-linux-$*
 	@if [ "$(DOCKER_PUSH)" = "true" ]; then docker push $(IMAGE_NAMESPACE)/$(BINARY_NAME):$(VERSION)-linux-$*; fi
 
 image-multi: set-qemu $(if $(DO_BUILD), dist/$(BINARY_NAME)-linux-arm64 dist/$(BINARY_NAME)-linux-amd64)
-	@if [ "$(DOCKER_PUSH)" = "true" ]; then PUSH_OPTION="--push"; fi
 	docker buildx build --tag $(IMAGE_NAMESPACE)/$(BINARY_NAME):$(VERSION) --target $(BINARY_NAME) --platform linux/amd64,linux/arm64 --file ./Dockerfile ${PUSH_OPTION} .
 
 set-qemu:
